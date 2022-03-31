@@ -6,6 +6,10 @@ import Header from './Components/Header';
 import Home from './Pages/Home';
 import LogIn from './Pages/LogIn';
 import Register from './Pages/Register';
+import Questions from './Pages/Questions';
+import Tags from './Pages/Tags';
+import Users from './Pages/Users';
+import Profile from './Pages/Profile';
 
 function App() {
 
@@ -17,8 +21,11 @@ function App() {
                 <Route path="/" element={<Home/>} />
                 <Route path="/login" element={<LogIn />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/contact" element={<div>Contact</div>} />
-
+                <Route path="/questions" element={<Questions />} />
+                <Route path="/tags" element={<Tags/>} />
+                <Route path="/users" element={<Users/>} />
+                <Route path='/profile' element={<Profile/>} />
+                <Route path="*" element={<div>Not found</div>} />
             </Routes>
             </main>
         </>
