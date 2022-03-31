@@ -51,7 +51,7 @@ const Home = () => {
                         from developers
                         <b> without an account</b>
                     </p>
-                    <Link to={''}>Browse as Guest</Link>
+                    <Link to={'/questions'}>Browse as Guest</Link>
                 </section>
             </section>
             <h1 className='home_text'>

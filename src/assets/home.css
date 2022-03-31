@@ -7,10 +7,11 @@
 }
 
 section.squares{
+    
     display: grid;
     grid-auto-flow: column;
     justify-content: space-evenly;
-    padding: 5rem;
+    padding: 8rem 5rem;
 }
 
 section.new_user {

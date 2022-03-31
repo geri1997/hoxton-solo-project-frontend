@@ -1,13 +1,18 @@
 nav.main_nav {
     display: grid;
     grid-template-rows: 35px;
-    margin: 0rem 3rem;
+    /* margin: 0rem 3rem; */
     grid-template-columns: auto 1fr auto;
     gap: 2rem;
     align-items: center;
     padding: 0.5rem 1rem;
     background-color: #fff;
     border-bottom: 1px solid #e5e5e5;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    z-index: 2;
 }
 
 nav.main_nav img {

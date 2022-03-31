@@ -1,11 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../assets/header.css';
 
 const Header = () => {
+    const navigate = useNavigate();
+
     return (
         <nav className='main_nav'>
-            <img src='src\assets\Stack_Overflow_logo.svg' alt='' />
-            
+            <img
+                onClick={(e) => navigate('/')}
+                src='src\assets\Stack_Overflow_logo.svg'
+                alt=''
+            />
+
             <div className='search_bar'>
                 <svg
                     aria-hidden='true'
@@ -25,8 +32,18 @@ const Header = () => {
                 />
             </div>
             <section className='account_nav'>
-                <button className='account log_in'>Log in</button>
-                <button className='account sign_up'>Sign up</button>
+                <button
+                    onClick={(e) => navigate('/login')}
+                    className='account log_in'
+                >
+                    Log in
+                </button>
+                <button
+                    onClick={(e) => navigate('/register')}
+                    className='account sign_up'
+                >
+                    Sign up
+                </button>
             </section>
         </nav>
     );
