@@ -41,7 +41,7 @@ section.main_section {
 
 section.right_sidebar {
     grid-area: right-menu;
-
+    align-content: flex-start;
     border-left: 1px solid #e5e5e5;
     padding: 0.5rem;
     display: grid;
@@ -63,7 +63,7 @@ h4 {
     font-weight: normal;
 }
 
-section.main_questions .questions_header a {
+ .questions_header a, .question_header a {
     text-decoration: none;
     width: max-content;
     padding: 0.5rem 1.5rem;
@@ -73,7 +73,7 @@ section.main_questions .questions_header a {
     background-color: #0a95ff;
 }
 
-section.main_questions .questions_list ul li {
+section.main_questions .questions_list ul li.single_question_li {
     display: grid;
     grid-template-columns: 150px 1fr;
 }
@@ -104,6 +104,22 @@ section.main_questions .questions_list ul li .votes {
 .question_desc h3 {
     color: #0074cc;
     font-weight: normal;
+    white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  cursor: pointer;
+}
+
+p.short_desc{
+    /* white-space: nowrap;  */
+max-width: 60ch;
+font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+
 }
 
 .popular_Tags {
@@ -150,4 +166,31 @@ section.main_questions .questions_list ul li .votes {
 
 .new_questions_ul a:hover {
     color: #0a95ff;
+}
+
+li.tag{
+    text-decoration: none;
+    color: #39739d;
+    font-size: 0.8rem;
+    background-color: #e1ecf4;
+    padding: 0.3rem 0.6rem;
+    width: max-content;
+    list-style: none;
+    margin-right: 1.5rem;
+}
+
+.pagination_btns{
+    display: grid;
+    grid-auto-flow: column;
+}
+
+a.page_btn{
+    text-decoration: none;
+    color: #39739d;
+    font-size: 0.8rem;
+    background-color: #e1ecf4;
+    padding: 0.3rem 0.6rem;
+    width: max-content;
+    list-style: none;
+    margin-right: 1.5rem;
 }

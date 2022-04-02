@@ -21,6 +21,7 @@ li.single_tag{
     border: 1px solid rgb(180, 179, 179);
     padding: 1rem;
     gap: 1rem;
+    grid-template-rows: auto 1fr;
 }
 
 li.single_tag p{

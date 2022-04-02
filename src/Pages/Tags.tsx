@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import LeftSidebar from '../Components/LeftSidebar';
 import RightSidebar from '../Components/RightSidebar';
 import '../assets/tags.css';
+//@ts-ignore
+import { useStore } from '../Store/store';
+import { useNavigate } from 'react-router-dom';
+import { getTags, validate } from '../utils/api';
 
 const Tags = () => {
+    const tags = useStore((store: any) => store.tags);
+    const setTags = useStore((store: any) => store.setTags);
+    const setCurrentUser = useStore((store: any) => store.setCurrentUser);
+    const navigate = useNavigate();
+    useEffect(() => {
+        validate().then((data) => {
+            if (data.error) return;
+            setCurrentUser(data);
+        });
+    }, []);
+    useEffect(() => {
+        getTags().then(setTags);
+    }, []);
+
     return (
         <div className='questions_container'>
             <LeftSidebar />
@@ -21,87 +39,14 @@ const Tags = () => {
 
                 <section className='main_tags_list'>
                     <ul className='main_tags_ul'>
-                        <li className='single_tag'>
-                            <h4> TagName</h4>
-                            <p>
-                                For questions regarding programming in
-                                ECMAScript (JavaScript/JS) and its various
-                                dialects/implementations (excluding
-                                ActionScript).
-                            </p>
-                        </li>
-                        <li className='single_tag'>
-                            <h4> TagName</h4>
-                            <p>
-                                For questions regarding programming in
-                                ECMAScript (JavaScript/JS) and its various
-                                dialects/implementations (excluding
-                                ActionScript).
-                            </p>
-                        </li>
-                        <li className='single_tag'>
-                            <h4> TagName</h4>
-                            <p>
-                                For questions regarding programming in
-                                ECMAScript (JavaScript/JS) and its various
-                                dialects/implementations (excluding
-                                ActionScript).
-                            </p>
-                        </li>
-                        <li className='single_tag'>
-                            <h4> TagName</h4>
-                            <p>
-                                For questions regarding programming in
-                                ECMAScript (JavaScript/JS) and its various
-                                dialects/implementations (excluding
-                                ActionScript).
-                            </p>
-                        </li>
-                        <li className='single_tag'>
-                            <h4> TagName</h4>
-                            <p>
-                                For questions regarding programming in
-                                ECMAScript (JavaScript/JS) and its various
-                                dialects/implementations (excluding
-                                ActionScript).
-                            </p>
-                        </li>
-                        <li className='single_tag'>
-                            <h4> TagName</h4>
-                            <p>
-                                For questions regarding programming in
-                                ECMAScript (JavaScript/JS) and its various
-                                dialects/implementations (excluding
-                                ActionScript).
-                            </p>
-                        </li>
-                        <li className='single_tag'>
-                            <h4> TagName</h4>
-                            <p>
-                                For questions regarding programming in
-                                ECMAScript (JavaScript/JS) and its various
-                                dialects/implementations (excluding
-                                ActionScript).
-                            </p>
-                        </li>
-                        <li className='single_tag'>
-                            <h4> TagName</h4>
-                            <p>
-                                For questions regarding programming in
-                                ECMAScript (JavaScript/JS) and its various
-                                dialects/implementations (excluding
-                                ActionScript).
-                            </p>
-                        </li>
-                        <li className='single_tag'>
-                            <h4> TagName</h4>
-                            <p>
-                                For questions regarding programming in
-                                ECMAScript (JavaScript/JS) and its various
-                                dialects/implementations (excluding
-                                ActionScript).
-                            </p>
-                        </li>
+                        {tags.map((tag: any) => (
+                            <li className='single_tag'>
+                                <h4>{tag.name}</h4>
+                                <p>
+                                    {tag.description}
+                                </p>
+                            </li>
+                        ))}
                     </ul>
                 </section>
             </section>

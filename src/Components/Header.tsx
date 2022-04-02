@@ -1,18 +1,22 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/header.css';
+//@ts-ignore
+import { useStore } from '../Store/store';
+import { removeTokenFromStorage } from '../utils/helpers';
 
 const Header = () => {
     const navigate = useNavigate();
+    const currentUser = useStore((store: any) => store.currentUser);
+    const setCurrentUser = useStore((store: any) => store.setCurrentUser);
 
     return (
         <nav className='main_nav'>
             <img
-                onClick={(e) => navigate('/')}
+                onClick={(e) => !currentUser?navigate('/'):navigate('/questions')}
                 src='src\assets\Stack_Overflow_logo.svg'
                 alt=''
             />
-
             <div className='search_bar'>
                 <svg
                     aria-hidden='true'
@@ -32,19 +36,45 @@ const Header = () => {
                 />
             </div>
             <section className='account_nav'>
-                <button
-                    onClick={(e) => navigate('/login')}
-                    className='account log_in'
-                >
-                    Log in
-                </button>
-                <button
-                    onClick={(e) => navigate('/register')}
-                    className='account sign_up'
-                >
-                    Sign up
-                </button>
-            </section>
+                {!currentUser ? (
+                    <>
+                        <button
+                            onClick={(e) => navigate('/login')}
+                            className='account log_in'
+                        >
+                            Log in
+                        </button>
+                        <button
+                            onClick={(e) => navigate('/register')}
+                            className='account sign_up'
+                        >
+                            Sign up
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        <button
+                            onClick={(e) => navigate('/profile')}
+                            className='account log_in'
+                        >
+                            Profile
+                        </button>
+                        <button
+                            onClick={(e) => {
+                                removeTokenFromStorage();
+                                setCurrentUser(null);
+                                navigate('/');
+                            }}
+                            className='account sign_up'
+                        >
+                            Sign out
+                        </button>
+                        <h4 style={{ marginLeft: '2rem' }}>
+                            {currentUser.username}
+                        </h4>
+                    </>
+                )}
+            </section>{' '}
         </nav>
     );
 };

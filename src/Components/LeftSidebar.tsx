@@ -15,6 +15,15 @@ const LeftSidebar = () => {
                         Questions
                     </li>
                 </Link>
+                <Link to={'/discord'}>
+                    <li
+                        className={
+                            document.URL.endsWith('discord') ? 'selected' : ''
+                        }
+                    >
+                        Discord Questions
+                    </li>
+                </Link>
                 <Link to={'/tags'}>
                     <li
                         className={

@@ -1,0 +1,6 @@
+.question_header{
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    padding: 2rem;
+}

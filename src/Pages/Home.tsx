@@ -1,8 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import '../assets/home.css';
+import { validate } from '../utils/api';
+//@ts-ignore
+import { useStore } from '../Store/store';
 
 const Home = () => {
+
+    const setCurrentUser = useStore((store: any) => store.setCurrentUser);
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        validate().then((data) => {
+            if (data.error) return;
+            setCurrentUser(data.user);
+            navigate('/questions');
+        });
+    }, []);
+
     return (
         <div className='home_container'>
             <section className='squares'>
