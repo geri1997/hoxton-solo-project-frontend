@@ -108,3 +108,7 @@ export function checkIfLikedCommnent(commentId: any) {
         }),
     }).then((res) => res.json());
 }
+
+export function getPopularTags(){
+    return fetch(`${url}/popularTags`).then((res) => res.json());
+}
