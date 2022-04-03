@@ -38,8 +38,8 @@ export function validate() {
     }).then((res) => res.json());
 }
 
-export function getAllQuestions(): Promise<any> {
-    return fetch(`${url}/questions?page=0`, {
+export function getAllQuestions(page: number): Promise<any> {
+    return fetch(`${url}/questions?page=${page}`, {
         method: 'GET',
         headers: {
             authorization: getTokenFromStorage(),
@@ -47,7 +47,7 @@ export function getAllQuestions(): Promise<any> {
     }).then((res) => res.json());
 }
 
-export function getTags(){
+export function getTags() {
     return fetch(`${url}/tags`, {
         method: 'GET',
         headers: {
@@ -56,11 +56,55 @@ export function getTags(){
     }).then((res) => res.json());
 }
 
-export function getSingleQuestion(id:number){
+export function getSingleQuestion(id: number) {
     return fetch(`${url}/question/${id}`, {
         method: 'GET',
         headers: {
             authorization: getTokenFromStorage(),
         },
+    }).then((res) => res.json());
+}
+
+export function createComment(
+    userId: any,
+    questionId: any,
+    content: any,
+    createdAt: any
+) {
+    return fetch(`${url}/comment`, {
+        method: 'POST',
+        headers: {
+            authorization: getTokenFromStorage(),
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            userId,
+            questionId,
+            content,
+            createdAt,
+        }),
+    }).then((res) => res.json());
+}
+
+export function likeComment(commentId: any) {
+    return fetch(`${url}/comment/${commentId}/upvote`, {
+        method: 'PATCH',
+        headers: {
+            authorization: getTokenFromStorage(),
+            'Content-type': 'application/json',
+        },
+    }).then((res) => res.json());
+}
+
+export function checkIfLikedCommnent(commentId: any) {
+    return fetch(`${url}/commentLiked`, {
+        method: 'POST',
+        headers: {
+            authorization: getTokenFromStorage(),
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            commentId,
+        }),
     }).then((res) => res.json());
 }

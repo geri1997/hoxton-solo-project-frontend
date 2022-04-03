@@ -17,7 +17,14 @@ export const useStore = create((set, get) => ({
     setShowLogInError: (val) => set((state) => ({ showLogInError: val })),
     products: [],
     currentQuestion: null,
-    setCurrentQuestion: (question) => set((state) => ({ currentQuestion: question })),
+    likeQuestion: (question) =>
+        set((state) => ({
+            questions: state.questions.map((q) =>
+                q.id === question.id ? { ...q, likes: q.likes + 1 } : q
+            ),
+        })),
+    setCurrentQuestion: (question) =>
+        set((state) => ({ currentQuestion: question })),
     setProducts: (products) => set((state) => ({ products: products })),
     updateQuantity: async (e, order, loggedUser, itemId) => {
         const quantity = document.querySelector(
@@ -31,10 +38,9 @@ export const useStore = create((set, get) => ({
                     'Content-Type': 'Application/json',
                 },
                 body: JSON.stringify({
-                    
                     quantity: order
-                    //@ts-ignore
-                        ? +quantity.value
+                        ? //@ts-ignore
+                          +quantity.value
                         : get().currentUser.itemsOrdered.find(
                               (order) => order.itemId === itemId
                           ).quantity + 1,

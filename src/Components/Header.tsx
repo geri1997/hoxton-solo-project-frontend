@@ -13,8 +13,10 @@ const Header = () => {
     return (
         <nav className='main_nav'>
             <img
-                onClick={(e) => !currentUser?navigate('/'):navigate('/questions')}
-                src='src\assets\Stack_Overflow_logo.svg'
+                onClick={(e) =>
+                    !currentUser ? navigate('/') : navigate('/questions')
+                }
+                src='\src\assets\Stack_Overflow_logo.svg'
                 alt=''
             />
             <div className='search_bar'>
@@ -63,7 +65,7 @@ const Header = () => {
                             onClick={(e) => {
                                 removeTokenFromStorage();
                                 setCurrentUser(null);
-                                navigate('/');
+                                
                             }}
                             className='account sign_up'
                         >

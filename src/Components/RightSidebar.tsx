@@ -47,7 +47,7 @@ const RightSidebar = () => {
                 </ul>
             </section>
             <section className='newest_questions'>
-                <h5>NEWEST QUESTIONS</h5>
+                <h5>LATEST QUESTIONS</h5>
                 <ul className='new_questions_ul'>
                     <Link to={''}>
                         <li>

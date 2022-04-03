@@ -81,6 +81,7 @@ section.main_questions .questions_list ul li.single_question_li {
 section.main_questions .questions_list ul li .votes {
     display: grid;
     padding: 0.5rem;
+    font-size: 0.8rem;
 }
 
 .tags_userInfo {
