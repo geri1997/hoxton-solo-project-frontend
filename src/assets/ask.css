@@ -1,0 +1,51 @@
+.ask_question_form{
+    display: grid;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.title-form-group{
+    display: grid;
+    gap: 1rem;
+}
+
+.title-form-group label{
+    font-size: 1.2rem;
+}
+
+.title-form-group input{
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #dadada;
+    border-radius: 0.3rem;
+}
+
+.description-form-group{
+    display: grid;
+    gap: 1rem;
+}
+
+.description-form-group textarea{
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #dadada;
+    border-radius: 0.3rem;
+}
+
+.ask_question_form select{
+    width: 20%;
+    padding: 0.5rem;
+    border: 1px solid #dadada;
+    border-radius: 0.3rem;
+}
+
+.ask_question_form button{
+    text-decoration: none;
+    width: max-content;
+    padding: 0.5rem 1.5rem;
+    color: white;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    background-color: #0a95ff;
+    cursor: pointer;
+}

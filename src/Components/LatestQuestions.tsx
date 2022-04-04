@@ -12,17 +12,15 @@ const LatestQuestions = () => {
         <section className='newest_questions'>
             <h5>LATEST QUESTIONS</h5>
             <ul className='new_questions_ul'>
-            <li>test</li>
                 {latestQuestions.map((question: any) => {
-                    {
-                        console.log(question.title);
-                    }
-                    <Link
-                        key={`popQ${question.id}`}
-                        to={`/questions/${question.id}`}
-                    >
-                        <li>dbsdsfgdssfgssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</li>
-                    </Link>;
+                    return (
+                        <Link
+                            key={`popQ${question.id}`}
+                            to={`/questions/${question.id}`}
+                        >
+                            <li>{question.title}</li>
+                        </Link>
+                    );
                 })}
             </ul>
         </section>

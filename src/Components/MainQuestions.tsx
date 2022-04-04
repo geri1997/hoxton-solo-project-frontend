@@ -17,7 +17,7 @@ const MainQuestions = () => {
         });
     }, []);
 
-    const numberOfPages = Math.ceil(count / 10); //i was tihnking for a couple of min about how to do it and after i figured it out i wrote the const name and copilot autofilled the solution that took me minutes to figure out
+    const numberOfPages = Math.ceil(count / 10); 
     const createPaginationBtns = useCallback(
         function a() {
             const pageBtns = [];
@@ -73,7 +73,7 @@ const MainQuestions = () => {
                                 </p>
                                 <section className='tags_userInfo'>
                                     <ul className='tagList'>
-                                        <li className='tag'>{question.tag}</li>
+                                        <li className='tag'><Link style={{textDecoration:'none'}} to={`/tags/${question.tagId}`}>{question.tag}</Link></li>
                                     </ul>
                                     <section className='userInfo'>
                                         <span className='user_name'>

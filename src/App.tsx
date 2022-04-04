@@ -13,6 +13,7 @@ import Profile from './Pages/Profile';
 import Discord from './Pages/Discord';
 import SingleQuestion from './Pages/SingleQuestion';
 import SingleTag from './Pages/SingleTag';
+import AskQuestion from './Pages/AskQuestion';
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                     <Route path='/tags' element={<Tags />} />
                     <Route path='/tags/:id' element={<SingleTag/>} />
                     <Route path='/users' element={<Users />} />
+                    <Route path='/ask-question' element={<AskQuestion />} />
                     <Route path='/profile' element={<Profile />} />
                     <Route path='/discord' element={<Discord />} />
                     <Route path='*' element={<div>Not found</div>} />

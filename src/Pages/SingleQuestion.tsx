@@ -25,11 +25,11 @@ const SingleQuestion = () => {
             for (const comment of data.comments) {
                 checkIfLikedCommnent(comment.id).then((data) => {
                     if (data.error) return;
-                    setlikedComments((prevLiked:any)=> [...prevLiked,data]);//doesnt work like this [...prevLiked,data]. it just adds the last element
+                    setlikedComments((prevLiked: any) => [...prevLiked, data]); //doesnt work like this [...prevLiked,data]. it just adds the last element
                 });
             }
         });
-    }, []);
+    }, [params.id]);
     const currentUser = useStore((store: any) => store.currentUser);
     const setCurrentUser = useStore((store: any) => store.setCurrentUser);
     const navigate = useNavigate();
@@ -71,14 +71,10 @@ const SingleQuestion = () => {
                 ...currentQuestion,
                 comments: [...question.comments],
             });
-            checkIfLikedCommnent(
-                comment.id
-            ).then((data) => {
-                console.log(data)
+            checkIfLikedCommnent(comment.id).then((data) => {
+                console.log(data);
                 if (data.error) return;
-                setlikedComments(
-                    [...likedComments,data]
-                );
+                setlikedComments([...likedComments, data]);
             });
         });
         //fill with red
@@ -133,7 +129,16 @@ const SingleQuestion = () => {
                         <p>{currentQuestion.content}</p>
                         <section className='single_question_info'>
                             <ul>
-                                <li className='tag'>{currentQuestion.tag}</li>
+                                <Link
+                                    style={{
+                                        textDecoration: 'none',
+                                    }}
+                                    to={'/tags/' + currentQuestion.tagId}
+                                >
+                                    <li className='tag'>
+                                        {currentQuestion.tag}
+                                    </li>
+                                </Link>
                             </ul>
                             <span className='time_of_post'>
                                 {new Date(
@@ -155,14 +160,13 @@ const SingleQuestion = () => {
                                     <svg
                                         onClick={(e) => {
                                             upvoteComment(e, comment.id);
-                                            
                                         }}
                                         fill={
                                             likedComments.find(
                                                 (comment1: any) =>
                                                     comment1.commentId ===
                                                     comment.id
-                                            )&&currentUser
+                                            ) && currentUser
                                                 ? 'red'
                                                 : 'gray'
                                         }

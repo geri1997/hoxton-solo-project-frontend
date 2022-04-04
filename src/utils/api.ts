@@ -116,3 +116,21 @@ export function getPopularTags() {
 export function getQuestionsByTag(tag: string) {
     return fetch(`${url}/tag/${tag}`).then((res) => res.json());
 }
+
+
+export function createPost(userId:string,title: string, content: string, tag:string) {
+    return fetch(`${url}/question`, {
+        method: 'POST',
+        headers: {
+            authorization: getTokenFromStorage(),
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            userId,
+            title,
+            content,
+            tag,
+            createdAt: new Date().toISOString(),
+        }),
+    }).then((res) => res.json());
+}

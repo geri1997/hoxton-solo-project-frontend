@@ -109,6 +109,7 @@ section.main_questions .questions_list ul li .votes {
   overflow: hidden;
   text-overflow: ellipsis; 
   cursor: pointer;
+  max-width: max-content;
 }
 
 p.short_desc{
