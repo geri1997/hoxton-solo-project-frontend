@@ -40,7 +40,7 @@ export const useStore = create((set, get) => ({
                 body: JSON.stringify({
                     quantity: order
                         ? //@ts-ignore
-                          +quantity.value
+                        +quantity.value
                         : get().currentUser.itemsOrdered.find(
                               (order) => order.itemId === itemId
                           ).quantity + 1,

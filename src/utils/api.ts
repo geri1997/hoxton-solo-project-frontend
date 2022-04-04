@@ -109,6 +109,10 @@ export function checkIfLikedCommnent(commentId: any) {
     }).then((res) => res.json());
 }
 
-export function getPopularTags(){
+export function getPopularTags() {
     return fetch(`${url}/popularTags`).then((res) => res.json());
+}
+
+export function getQuestionsByTag(tag: string) {
+    return fetch(`${url}/tag/${tag}`).then((res) => res.json());
 }

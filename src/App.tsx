@@ -12,6 +12,7 @@ import Users from './Pages/Users';
 import Profile from './Pages/Profile';
 import Discord from './Pages/Discord';
 import SingleQuestion from './Pages/SingleQuestion';
+import SingleTag from './Pages/SingleTag';
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                     <Route path='/questions' element={<Questions />} />
                     <Route path='/questions/:id' element={<SingleQuestion />} />
                     <Route path='/tags' element={<Tags />} />
+                    <Route path='/tags/:id' element={<SingleTag/>} />
                     <Route path='/users' element={<Users />} />
                     <Route path='/profile' element={<Profile />} />
                     <Route path='/discord' element={<Discord />} />
