@@ -55,12 +55,12 @@ const Header = () => {
                     </>
                 ) : (
                     <>
-                        <button
+                        {/* <button
                             onClick={(e) => navigate('/profile')}
                             className='account log_in'
                         >
                             Profile
-                        </button>
+                        </button> */}
                         <button
                             onClick={(e) => {
                                 removeTokenFromStorage();

@@ -15,9 +15,9 @@ const LeftSidebar = () => {
                 <NavLink to={'/tags'}>
                     <li>Tags</li>
                 </NavLink>
-                <NavLink to={'/users'}>
+                {/* <NavLink to={'/users'}>
                     <li>Users</li>
-                </NavLink>
+                </NavLink> */}
             </ul>
         </section>
     );
