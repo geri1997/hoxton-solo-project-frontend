@@ -26,6 +26,9 @@ export const useStore = create((set, get) => ({
     setCurrentQuestion: (question) =>
         set((state) => ({ currentQuestion: question })),
     setProducts: (products) => set((state) => ({ products: products })),
+    discordQuestions: [],
+    setDiscordQuestions: (questions) =>
+        set((state) => ({ discordQuestions: questions })),
     updateQuantity: async (e, order, loggedUser, itemId) => {
         const quantity = document.querySelector(
             `select#cart${order.Item?.title}Quantity`
@@ -40,7 +43,7 @@ export const useStore = create((set, get) => ({
                 body: JSON.stringify({
                     quantity: order
                         ? //@ts-ignore
-                        +quantity.value
+                          +quantity.value
                         : get().currentUser.itemsOrdered.find(
                               (order) => order.itemId === itemId
                           ).quantity + 1,

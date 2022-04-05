@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+//@ts-ignore
+import { useStore } from '../Store/store';
 
 const DiscordQuestions = () => {
-    const [discordQuestions, setdiscordQuestions] = useState([]);
+    // const [discordQuestions, setdiscordQuestions] = useState([]);
+    const discordQuestions = useStore((store: any) => store.discordQuestions);
+    const setdiscordQuestions = useStore((store: any) => store.setDiscordQuestions);
 
     useEffect(() => {
         fetch(`http://localhost:3009/discord-questions/895957476606898176`)
@@ -24,19 +28,19 @@ const DiscordQuestions = () => {
 
             <section className='questions_list'>
                 <ul>
-                    {discordQuestions.map((question) => (
-                        <li className='single_question_li'>
+                    {discordQuestions.map((question:any) => (
+                        <li key={question.id} className='single_question_li'>
                             <section className='votes'>
                                 <span>0 votes</span>
                                 <span>0 answers</span>
                                 <span>0 views</span>
                             </section>
                             <section className='question_desc'>
-                                <h3>
+                                <h3><Link style={{textDecoration:'none'}} to={'/discord/'+question.thread.id}>
                                     {
                                         //@ts-ignore
                                         question.content
-                                    }
+                                    }</Link>
                                 </h3>
                                 <p className='short_desc'>
                                     {' '}

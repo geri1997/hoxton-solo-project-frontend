@@ -14,6 +14,7 @@ import Discord from './Pages/Discord';
 import SingleQuestion from './Pages/SingleQuestion';
 import SingleTag from './Pages/SingleTag';
 import AskQuestion from './Pages/AskQuestion';
+import DiscordQuestion from './Pages/DiscordQuestion';
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                     <Route path='/ask-question' element={<AskQuestion />} />
                     <Route path='/profile' element={<Profile />} />
                     <Route path='/discord' element={<Discord />} />
+                    <Route path='/discord/:id' element={<DiscordQuestion />} />
                     <Route path='*' element={<div>Not found</div>} />
                 </Routes>
             </main>
