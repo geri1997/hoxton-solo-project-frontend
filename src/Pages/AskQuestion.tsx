@@ -22,7 +22,8 @@ const AskQuestion = () => {
 
     function handleSubmit(e:any){
         e.preventDefault();
-        createPost(currentUser.id,e.target.title.value, e.target.description.value, e.target.tags.value).then(
+        console.log(JSON.stringify(e.target.description.value));
+        createPost(currentUser.id,e.target.title.value, JSON.stringify(e.target.description.value), e.target.tags.value).then(
             (data: any) => {
                 if (data.error) return;
                 setQuestions(data.questions)

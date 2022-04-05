@@ -3,6 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { getAllQuestions } from '../utils/api';
 //@ts-ignore
 import { useStore } from '../Store/store';
+import { MainQSingle } from './MainQSingle';
 const MainQuestions = () => {
     const currentUser = useStore((store: any) => store.currentUser);
     const setQuestions = useStore((store: any) => store.setQuestions);
@@ -23,7 +24,7 @@ const MainQuestions = () => {
             const pageBtns = [];
             for (let i = 1; i <= numberOfPages; i++) {
                 pageBtns.push(
-                    <button onClick={(e) => {
+                    <button key={i} onClick={(e) => {
                         getAllQuestions(i-1).then((data) => {
                         
                             setQuestions(data.questions)
@@ -35,7 +36,7 @@ const MainQuestions = () => {
             }
             return pageBtns;
         },
-        [count]
+        [numberOfPages]
     );
 
     return (
@@ -53,36 +54,7 @@ const MainQuestions = () => {
             <section className='questions_list'>
                 <ul>
                     {questions.map((question: any) => (
-                        <li key={question.id} className='single_question_li'>
-                            <section className='votes'>
-                                <span>{question.upvotes +  question.downvotes} votes</span>
-                                <span>{question.nrOfAnswers.count} answers</span>
-                                <span>0 views</span>
-                            </section>
-                            <section className='question_desc'>
-                                <h3
-                                    onClick={(e) =>
-                                        navigate(`/questions/${question.id}`)
-                                    }
-                                >
-                                    {question.title}
-                                </h3>
-                                <p className='short_desc'>
-                                    {' '}
-                                    {question.content}
-                                </p>
-                                <section className='tags_userInfo'>
-                                    <ul className='tagList'>
-                                        <li className='tag'><Link style={{textDecoration:'none'}} to={`/tags/${question.tagId}`}>{question.tag}</Link></li>
-                                    </ul>
-                                    <section className='userInfo'>
-                                        <span className='user_name'>
-                                            {question.username}
-                                        </span>
-                                    </section>
-                                </section>
-                            </section>
-                        </li>
+                        <MainQSingle key={question.id} question={question}/>
                     ))}
                 </ul>
                 <ul className='pagination_btns'>{createPaginationBtns()}</ul>

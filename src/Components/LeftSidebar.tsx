@@ -1,47 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const LeftSidebar = () => {
     return (
         <section className='left_sidebar'>
             <h5>PUBLIC</h5>
             <ul>
-                <Link to={'/questions'}>
-                    <li
-                        className={
-                            document.URL.endsWith('questions') ? 'selected' : ''
-                        }
-                    >
-                        Questions
-                    </li>
-                </Link>
-                <Link to={'/discord'}>
-                    <li
-                        className={
-                            document.URL.endsWith('discord') ? 'selected' : ''
-                        }
-                    >
-                        Discord Questions
-                    </li>
-                </Link>
-                <Link to={'/tags'}>
-                    <li
-                        className={
-                            document.URL.endsWith('tags') ? 'selected' : ''
-                        }
-                    >
-                        Tags
-                    </li>
-                </Link>
-                <Link to={'/users'}>
-                    <li
-                        className={
-                            document.URL.endsWith('users') ? 'selected' : ''
-                        }
-                    >
-                        Users
-                    </li>
-                </Link>
+                <NavLink end to={'/questions'}>
+                    <li>Questions</li>
+                </NavLink>
+                <NavLink to={'/discord'}>
+                    <li>Discord Questions</li>
+                </NavLink>
+                <NavLink to={'/tags'}>
+                    <li>Tags</li>
+                </NavLink>
+                <NavLink to={'/users'}>
+                    <li>Users</li>
+                </NavLink>
             </ul>
         </section>
     );

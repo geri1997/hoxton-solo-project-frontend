@@ -32,6 +32,9 @@ section.left_sidebar ul a {
     text-decoration: none;
     color: black;
 }
+section.left_sidebar ul a.active{
+    background-color: #d8d9da;
+}
 
 section.main_questions,
 section.main_section {

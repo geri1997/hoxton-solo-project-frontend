@@ -96,6 +96,16 @@ export function likeComment(commentId: any) {
     }).then((res) => res.json());
 }
 
+export function dislikeComment(commentId: any) {
+    return fetch(`${url}/comment/${commentId}/downvote`, {
+        method: 'PATCH',
+        headers: {
+            authorization: getTokenFromStorage(),
+            'Content-type': 'application/json',
+        },
+    }).then((res) => res.json());
+}
+
 export function checkIfLikedCommnent(commentId: any) {
     return fetch(`${url}/commentLiked`, {
         method: 'POST',

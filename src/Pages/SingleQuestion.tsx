@@ -9,30 +9,27 @@ import { useStore } from '../Store/store';
 import {
     checkIfLikedCommnent,
     createComment,
+    dislikeComment,
     getSingleQuestion,
     likeComment,
     validate,
 } from '../utils/api';
+import Question from '../Components/Question';
 
 const SingleQuestion = () => {
-    const [likedComments, setlikedComments] = useState<any>([]);
     const [currentQuestion, setCurrentQuestion] = useState<any>(null);
     const params = useParams();
     useEffect(() => {
         getSingleQuestion(+params.id!).then((data) => {
             if (data.error) return;
             setCurrentQuestion(data);
-            for (const comment of data.comments) {
-                checkIfLikedCommnent(comment.id).then((data) => {
-                    if (data.error) return;
-                    setlikedComments((prevLiked: any) => [...prevLiked, data]); //doesnt work like this [...prevLiked,data]. it just adds the last element
-                });
-            }
         });
     }, [params.id]);
     const currentUser = useStore((store: any) => store.currentUser);
     const setCurrentUser = useStore((store: any) => store.setCurrentUser);
     const navigate = useNavigate();
+
+    currentQuestion && currentQuestion.content.replaceAll('\n', '<br>');
 
     useEffect(() => {
         validate().then((data) => {
@@ -67,15 +64,44 @@ const SingleQuestion = () => {
             );
 
             comment.upvotes = data.upvotes;
+            comment.downvotes = data.downvotes
+            comment.isLiked = data.isLiked;
+            comment.isDisliked = data.isDisliked;
             setCurrentQuestion({
                 ...currentQuestion,
                 comments: [...question.comments],
             });
-            checkIfLikedCommnent(comment.id).then((data) => {
-                console.log(data);
-                if (data.error) return;
-                setlikedComments([...likedComments, data]);
+            // checkIfLikedCommnent(comment.id).then((data) => {
+            //     console.log(data);
+            //     if (data.error) return;
+            //     setlikedComments([...likedComments, data]);
+            // });
+        });
+        //fill with red
+        // e.target.style.fill = 'red';
+    }
+
+    function downvoteComment(e: any, commentId: number) {
+        dislikeComment(commentId).then((data) => {
+            if (data.error) return;
+            const question = JSON.parse(JSON.stringify(currentQuestion));
+            const comment = question.comments.find(
+                (comment: any) => comment.id === commentId
+            );
+
+            comment.upvotes = data.upvotes;
+            comment.downvotes = data.downvotes
+            comment.isDisliked = data.isDisliked;
+            comment.isLiked = data.isLiked
+            setCurrentQuestion({
+                ...currentQuestion,
+                comments: [...question.comments],
             });
+            // checkIfLikedCommnent(comment.id).then((data) => {
+            //     console.log(data);
+            //     if (data.error) return;
+            //     setlikedComments([...likedComments, data]);
+            // });
         });
         //fill with red
         // e.target.style.fill = 'red';
@@ -126,7 +152,11 @@ const SingleQuestion = () => {
                         </svg>
                     </section>
                     <section className='main_question'>
-                        <p>{currentQuestion.content}</p>
+                        <p
+                            dangerouslySetInnerHTML={{
+                                __html: currentQuestion.content,
+                            }}
+                        ></p>
                         <section className='single_question_info'>
                             <ul>
                                 <Link
@@ -161,15 +191,7 @@ const SingleQuestion = () => {
                                         onClick={(e) => {
                                             upvoteComment(e, comment.id);
                                         }}
-                                        fill={
-                                            likedComments.find(
-                                                (comment1: any) =>
-                                                    comment1.commentId ===
-                                                    comment.id
-                                            ) && currentUser
-                                                ? 'red'
-                                                : 'gray'
-                                        }
+                                        fill={comment.isLiked ? 'red' : 'gray'}
                                         aria-hidden='true'
                                         className='svg-icon iconArrowUpLg'
                                         width='36'
@@ -182,7 +204,10 @@ const SingleQuestion = () => {
                                         {comment.upvotes - comment.downvotes}
                                     </span>
                                     <svg
-                                        fill='gray'
+                                    onClick={(e) => {
+                                        downvoteComment(e, comment.id);
+                                    }}
+                                        fill={comment.isDisliked ? 'red' : 'gray'}
                                         aria-hidden='true'
                                         className='svg-icon iconArrowDownLg'
                                         width='36'
