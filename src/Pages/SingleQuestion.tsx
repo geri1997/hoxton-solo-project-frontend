@@ -10,8 +10,10 @@ import {
     checkIfLikedCommnent,
     createComment,
     dislikeComment,
+    dislikeQuestion,
     getSingleQuestion,
     likeComment,
+    likeQuestion,
     validate,
 } from '../utils/api';
 import Question from '../Components/Question';
@@ -64,7 +66,7 @@ const SingleQuestion = () => {
             );
 
             comment.upvotes = data.upvotes;
-            comment.downvotes = data.downvotes
+            comment.downvotes = data.downvotes;
             comment.isLiked = data.isLiked;
             comment.isDisliked = data.isDisliked;
             setCurrentQuestion({
@@ -90,9 +92,9 @@ const SingleQuestion = () => {
             );
 
             comment.upvotes = data.upvotes;
-            comment.downvotes = data.downvotes
+            comment.downvotes = data.downvotes;
             comment.isDisliked = data.isDisliked;
-            comment.isLiked = data.isLiked
+            comment.isLiked = data.isLiked;
             setCurrentQuestion({
                 ...currentQuestion,
                 comments: [...question.comments],
@@ -105,6 +107,30 @@ const SingleQuestion = () => {
         });
         //fill with red
         // e.target.style.fill = 'red';
+    }
+
+    function upvoteQuestion(e: any, questionId: number) {
+        likeQuestion(questionId).then((data) => {
+            if (data.error) return;
+            const question = JSON.parse(JSON.stringify(currentQuestion));
+            question.upvotes = data.upvotes;
+            question.downvotes = data.downvotes;
+            question.isLiked = data.isLiked;
+            question.isDisliked = data.isDisliked;
+            setCurrentQuestion(question);
+        });
+    }
+
+    function downvoteQuestion(e: any, questionId: number) {
+        dislikeQuestion(questionId).then((data) => {
+            if (data.error) return;
+            const question = JSON.parse(JSON.stringify(currentQuestion));
+            question.upvotes = data.upvotes;
+            question.downvotes = data.downvotes;
+            question.isDisliked = data.isDisliked;
+            question.isLiked = data.isLiked;
+            setCurrentQuestion(question);
+        });
     }
 
     return (
@@ -127,7 +153,8 @@ const SingleQuestion = () => {
                 <section className='question_content'>
                     <section className='singleQuestion_vote'>
                         <svg
-                            fill='gray'
+                        onClick={e=>currentUser&&upvoteQuestion(e,currentQuestion.id)}
+                            fill={currentQuestion.isLiked?'red':'gray'}
                             aria-hidden='true'
                             className='svg-icon iconArrowUpLg'
                             width='36'
@@ -141,7 +168,8 @@ const SingleQuestion = () => {
                                 currentQuestion.downvotes}
                         </span>
                         <svg
-                            fill='gray'
+                        onClick={e=>currentUser&&downvoteQuestion(e,currentQuestion.id)}
+                            fill={currentQuestion.isDisliked?'red':'gray'}
                             aria-hidden='true'
                             className='svg-icon iconArrowDownLg'
                             width='36'
@@ -204,10 +232,12 @@ const SingleQuestion = () => {
                                         {comment.upvotes - comment.downvotes}
                                     </span>
                                     <svg
-                                    onClick={(e) => {
-                                        downvoteComment(e, comment.id);
-                                    }}
-                                        fill={comment.isDisliked ? 'red' : 'gray'}
+                                        onClick={(e) => {
+                                            downvoteComment(e, comment.id);
+                                        }}
+                                        fill={
+                                            comment.isDisliked ? 'red' : 'gray'
+                                        }
                                         aria-hidden='true'
                                         className='svg-icon iconArrowDownLg'
                                         width='36'

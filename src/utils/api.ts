@@ -144,3 +144,23 @@ export function createPost(userId:string,title: string, content: string, tag:str
         }),
     }).then((res) => res.json());
 }
+
+export function likeQuestion(questionId: any) {
+    return fetch(`${url}/question/${questionId}/upvote`, {
+        method: 'PATCH',
+        headers: {
+            authorization: getTokenFromStorage(),
+            'Content-type': 'application/json',
+        },
+    }).then((res) => res.json());
+}
+
+export function dislikeQuestion(questionId: any) {
+    return fetch(`${url}/question/${questionId}/downvote`, {
+        method: 'PATCH',
+        headers: {
+            authorization: getTokenFromStorage(),
+            'Content-type': 'application/json',
+        },
+    }).then((res) => res.json());
+}
