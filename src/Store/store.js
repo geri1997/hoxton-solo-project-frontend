@@ -29,6 +29,9 @@ export const useStore = create((set, get) => ({
     discordQuestions: [],
     setDiscordQuestions: (questions) =>
         set((state) => ({ discordQuestions: questions })),
+    searchedQuestions: [],
+    setSearchedQuestions: (questions) =>
+        set((state) => ({ searchedQuestions: questions })),
     updateQuantity: async (e, order, loggedUser, itemId) => {
         const quantity = document.querySelector(
             `select#cart${order.Item?.title}Quantity`
