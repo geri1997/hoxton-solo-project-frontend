@@ -39,6 +39,7 @@ nav.main_nav img:hover {
 
 .search_bar input {
     height: 80%;
+    width: 100%;
     outline: none;
     border: none;
 }

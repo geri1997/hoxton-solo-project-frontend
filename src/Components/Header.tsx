@@ -23,8 +23,9 @@ const Header = () => {
             .then(data=>{
                 setQuestions(data.questions);
                 setCount(data.count.count);
+                 e.target.reset();
             });
-        // e.target.reset();
+       
     }
 
     return (

@@ -21,8 +21,9 @@ const DiscordQuestion = () => {
     if (!currentQuestion) return null;
 
     const foundQuestion = discordQuestions.find((question: any) => question.thread.id === params.id);
-    console.log(discordQuestions)
+    // console.log(discordQuestions)
 console.log(foundQuestion)
+console.log(currentQuestion.reverse())
     return (
         <div className='questions_container single'>
             <LeftSidebar />
@@ -33,7 +34,7 @@ console.log(foundQuestion)
                 
                 <section className='questions_list'>
                     <ul>
-                        {currentQuestion.map((question: any) => (
+                        {currentQuestion.reverse().map((question: any) => (
                             <li style={{listStyle:'none'}} key={question.id} className='single_question_li'>
                                 {/* <section className='votes'>
                                     <span>0 votes</span>
